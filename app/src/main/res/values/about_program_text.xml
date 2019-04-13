@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="about">
+        <item>@string/about_translate</item>
+        <item>@string/version</item>
+    </string-array>
+
+
+    <string name="about_translate"
+    >EN:The program encodes and decodes the text on the setup of a three-digit number inscribed through you or randomly.\n
+     The program was created solely for fun and learning.\n Novice programmer LinkClink\n\n
+     RU:Программа кодирует и декодирует текст на подставе трехзначного числа вписаного через вас или рандомно.\n
+     Программа была создана исключительно для забавы и обучения.\n Начинающим програмистом LinkClink\n\n
+     UA:Програма кодує і декодує текст на підставу тризначного числа вписаного через вас або рандомно.
+     Програма була створена виключно для забави і навчання.\n Початківцем програмистом LinkClink\n\n
+     PL:Program koduje i dekoduje tekst dotyczący ustawienia trzycyfrowego numeru wpisanego przez ciebie lub losowo.\n
+     Program został stworzony wyłącznie dla zabawy i nauki.\n Początkującym programistem LinkClink\n\n
+     Version Alpha 0.0.1
+    </string>
+
+    <string name="version">Alpha 0.0.1</string>
+
+
+
+</resources>
