@@ -17,5 +17,4 @@ public class DataGeneration
 
         return date;
     }
-
 }
