@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,18 +23,23 @@ public class Decoding extends AppCompatActivity
     private Button savetxt;
     private EditText edit_text;
 
-    Uri op_file_uri;
+    Uri get_file_uri;
     Intent fileIntent;
+
+    String save_text = null;
+    String save_filename;
 
     StringBuilder builder = new StringBuilder();
 
     //Class
     DataGeneration datepars = new DataGeneration();
     OpenFile openFile = new OpenFile();
+    SaveFile saveFile = new SaveFile();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decoding);
 
@@ -46,7 +52,7 @@ public class Decoding extends AppCompatActivity
     public void onClick(View view)
     {
         if(view == opentxt) GetPath();
-        if(view == savetxt) SaveTextToFile();
+        if(view == savetxt) CreateFile();
     }
 
     // Open activity to get uri to file
@@ -55,23 +61,21 @@ public class Decoding extends AppCompatActivity
         fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
         fileIntent.setType("*/*");
         startActivityForResult(fileIntent,5);
-
     }
 
-    public void SaveTextToFile()
+    // Open save file intent
+    public void CreateFile()
     {
-        int WRITE_REQUEST_CODE = 43;
         String mimeType ="text/plain";
-        String fileName = "decode.result"+datepars.save_date()+".txt";
+        save_filename = "decode.result"+datepars.save_date()+".txt";
 
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
 
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType(mimeType);
 
-        intent.putExtra(Intent.EXTRA_TITLE, fileName);
-        startActivityForResult(intent, WRITE_REQUEST_CODE);
-
+        intent.putExtra(Intent.EXTRA_TITLE, save_filename);
+        startActivityForResult(intent, 4);
     }
 
     @Override
@@ -79,18 +83,26 @@ public class Decoding extends AppCompatActivity
     {
         switch (requestCode)
         {
+            // Open (copy) file to Editview
             case 5:
             {
                 if(resultCode==RESULT_OK)
                 {
-                    op_file_uri = data.getData();
-                    edit_text.setText(builder = openFile.copy_to_editview(op_file_uri,getApplicationContext()));
+                    get_file_uri = data.getData();
+                    edit_text.setText(builder = openFile.copy_to_editview(get_file_uri,getApplicationContext()));
                 }
+                break;
+            }
+            // Save file with Editview
+            case 4:
+            {
+                get_file_uri = data.getData();
+                save_text=edit_text.getText().toString();
+                saveFile.writeToFile(save_text,getApplicationContext(),save_filename,get_file_uri);
                 break;
             }
         }
     }
-
 }
 
 
