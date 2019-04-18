@@ -1,5 +1,5 @@
 # Easy-Text-Coder-Android
-Program based on Android . 5+ This is program which can code and decode text ( suport . , - and latin symbols ) via includes metods.
+Program based on Android . 4.4+ KitKat This is program which can code and decode text ( suport . , - and latin symbols ) via includes metods.
 
 
 
