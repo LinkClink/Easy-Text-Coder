@@ -27,7 +27,6 @@ public class Basic extends AppCompatActivity
     {
         if(view == coding) coding();
         if(view == decoding) decoding();
-
     }
 
     public void coding()
@@ -40,9 +39,5 @@ public class Basic extends AppCompatActivity
         Intent intent = new Intent(Basic.this, Decoding.class);
         startActivityForResult(intent,1);
     }
-
-
-
-
 
 }
