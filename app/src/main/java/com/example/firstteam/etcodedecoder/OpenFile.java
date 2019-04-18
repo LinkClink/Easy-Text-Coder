@@ -21,6 +21,7 @@ public class OpenFile extends AppCompatActivity
     // Copy text with file
     public StringBuilder copy_to_editview(Uri op_file_uri, Context context)
     {
+        text.setLength(0);
         try
         {
             inputStream = context.getContentResolver().openInputStream(op_file_uri);
@@ -45,6 +46,7 @@ public class OpenFile extends AppCompatActivity
         {
             Toast.makeText(context.getApplicationContext(),"Open-Error " + e ,Toast.LENGTH_LONG).show();
         }
+
         return text;
     }
 }

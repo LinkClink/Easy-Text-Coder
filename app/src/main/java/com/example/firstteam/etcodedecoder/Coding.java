@@ -41,6 +41,7 @@ public class Coding extends AppCompatActivity
 
     String save_text = null;
     String save_filename;
+    String mimeType ="text/plain";
 
     StringBuilder builder = new StringBuilder();
 
@@ -72,14 +73,12 @@ public class Coding extends AppCompatActivity
     public void GetPath()
     {
         fileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        fileIntent.setType("*/*");
+        fileIntent.setType(mimeType);
         startActivityForResult(fileIntent,5);
     }
 
     public void SaveTextToFile()
     {
-
-        String mimeType ="text/plain";
         save_filename = "code.result."+datepars.save_date()+".txt";
 
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -89,7 +88,6 @@ public class Coding extends AppCompatActivity
 
         intent.putExtra(Intent.EXTRA_TITLE, save_filename);
         startActivityForResult(intent, 4);
-
     }
 
     @Override
@@ -115,5 +113,4 @@ public class Coding extends AppCompatActivity
             }
         }
     }
-
 }
