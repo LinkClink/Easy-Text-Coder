@@ -11,13 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/coding_open_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Open .txt"
-            android:onClick="onClick"
-            />
+        <GridLayout>
+            <Button
+                android:id="@+id/coding_open_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open .txt"
+                android:onClick="onClick"
+                />
+
+            <Spinner
+                android:id="@+id/coding_spinner_encod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_row="0"
+                />
+
+
+        </GridLayout>
 
         <Button
             android:id="@+id/coding_save_txt"
@@ -75,5 +87,6 @@
         </ScrollView>
 
     </TableLayout>
+
 
 </LinearLayout>

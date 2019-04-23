@@ -10,13 +10,23 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+     <GridLayout>
 
-        <Button
-            android:id="@+id/decoding_open_txt"
-            android:layout_width="wrap_content"
+     <Button
+        android:id="@+id/decoding_open_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Open .txt" />
+
+        <Spinner
+            android:id="@+id/decoding_spinner_encod"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="Open .txt" />
+            android:layout_column="2"
+            android:layout_row="0"
+            />
+    </GridLayout>
 
         <Button
             android:id="@+id/decoding_save_txt"
