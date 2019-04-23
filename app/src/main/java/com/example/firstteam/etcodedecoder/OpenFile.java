@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class OpenFile extends AppCompatActivity
 {
@@ -19,12 +20,13 @@ public class OpenFile extends AppCompatActivity
 
     // Support only latin + symbol (now)
     // Copy text with file
-    public StringBuilder copy_to_editview(Uri op_file_uri, Context context)
+    public StringBuilder copy_to_editview(Uri op_file_uri, Context context,String encode)
     {
         text.setLength(0);
         try
         {
             inputStream = context.getContentResolver().openInputStream(op_file_uri);
+
         }
         catch (FileNotFoundException e)
         {
@@ -33,7 +35,7 @@ public class OpenFile extends AppCompatActivity
 
         try
         {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,encode));
 
             while ((line = br.readLine()) != null)
             {
