@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -22,6 +24,7 @@ public class Decoding extends AppCompatActivity
     private Button opentxt;
     private Button savetxt;
     private EditText edit_text;
+    private Spinner encode_spinner;
 
     Uri get_file_uri;
     Intent fileIntent;
@@ -47,7 +50,9 @@ public class Decoding extends AppCompatActivity
         opentxt = (Button) findViewById(R.id.decoding_open_txt);
         savetxt = (Button) findViewById(R.id.decoding_save_txt);
         edit_text = (EditText) findViewById(R.id.editview_decoding);
+        encode_spinner = (Spinner) findViewById(R.id.decoding_spinner_encod);
 
+        set_spinner_adapter();
     }
 
     public void onClick(View view)
@@ -69,13 +74,13 @@ public class Decoding extends AppCompatActivity
     {
         save_filename = "decode.result"+datepars.save_date()+".txt";
 
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        fileIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
 
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType(mimeType);
+        fileIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        fileIntent.setType(mimeType);
 
-        intent.putExtra(Intent.EXTRA_TITLE, save_filename);
-        startActivityForResult(intent, 4);
+        fileIntent.putExtra(Intent.EXTRA_TITLE, save_filename);
+        startActivityForResult(fileIntent, 4);
     }
 
     @Override
@@ -86,22 +91,34 @@ public class Decoding extends AppCompatActivity
             // Open (copy) file to Editview
             case 5:
             {
+                //check when file is not initialisation
                 if(resultCode==RESULT_OK)
                 {
                     get_file_uri = data.getData();
-                    edit_text.setText(builder = openFile.copy_to_editview(get_file_uri,getApplicationContext()));
+                    edit_text.setText(builder = openFile.copy_to_editview(get_file_uri,getApplicationContext(),encode_spinner.getSelectedItem().toString()));
                 }
                 break;
             }
             // Save file with Editview
             case 4:
             {
-                get_file_uri = data.getData();
-                save_text=edit_text.getText().toString();
-                saveFile.writeToFile(save_text,getApplicationContext(),save_filename,get_file_uri);
-                break;
+                //check when file is not initialisation
+                if(resultCode==RESULT_OK)
+                {
+                    get_file_uri = data.getData();
+                    save_text = edit_text.getText().toString();
+                    saveFile.writeToFile(save_text, getApplicationContext(), save_filename, get_file_uri);
+                    break;
+                }
             }
         }
+    }
+    //set adapter to spinner
+    public void set_spinner_adapter()
+    {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.open_file_encoding, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        encode_spinner.setAdapter(adapter);
     }
 }
 

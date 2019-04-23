@@ -2,4 +2,10 @@
     <string name="app_name">Easy/Coder/Decoder</string>
     <string name="title_activity_coding">Coding</string>
     <string name="title_activity_decoding">Decoding</string>
+    
+    <string-array name="open_file_encoding">
+    <item>UTF-8</item>
+    <item>Cp1252</item>
+    </string-array>
+
 </resources>
