@@ -1,4 +1,4 @@
-# Easy-Text-Coder-Android
+# Easy TextCoder in Android
 Program based on Android . 4.4+ KitKat This is program which can code and decode text ( suport . , - and latin symbols ) via includes metods.
 
 
